@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=42", "wheel", "pybind11~=2.6.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "delaunay-geogram"
+version = "0.0.1"
+description = "Semantic segmentation on large-scale 3D scenes"
+readme = "README.md"
+requires-python = ">=3.10"
+keywords = ["Delaunay Triangulation", "Geogram", "Python", "C++", "Delaunay Tetrahedrization"]
+authors = [
+  { name = "Bruno Levy" },
+  { name = "Swansea University"}
+]
+maintainers = [ 
+  { name = "Carlos Cabo", email = "carloscabo@uniovi.es" },
+  { name = "Diego Laino", email = "diegolainor@gmail.com" },
+  { name = "romain janvier", email = "romain.janvier@hotmail.fr" } 
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Topic :: Scientific/Engineering",
+  "Intended Audience :: Science/Research",
+]
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py{38,39,310,311}
+
+[testenv]
+changedir = tests
+deps =
+  pytest >= 7.4
+  laspy >= 2.5
+commands = pytest -s --basetemp="{envtmpdir}" {posargs} delaunay.py
+"""
