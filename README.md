@@ -4,11 +4,11 @@ Fast and Robust 3D Delaunay Triangulation for Python / Python bindings for [Geog
 
 For now, it offers only very minimalistic bindings. 
 It is mainly intended to be plugged into [SuperPoint Transformer](https://github.com/drprojects/superpoint_transformer) 
-in replacement of [https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html](scipy.spatial.Delaunay) which is based on QHull.
+in replacement of [scipy.spatial.Delaunay](https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html) which is based on QHull.
 In this context, Geogram parallel and optimized architecture dramatically improve speed execution over Qhull based Delaunay.
-The self contained  
+The self contained nature of Geogram PSM packages make it very handy to convert and distribute into a python package.
 
-Bindings are not complete and API could evolve and break, we will try to adhere to semantic versioning (see changelog)
+Bindings are not complete and API could evolve and break, we will try to adhere to semantic versioning (see the changelog).
 
 # Installation
 
