@@ -8,11 +8,26 @@ using namespace pybind11::literals;
 
 PYBIND11_MODULE(delaunay_geogram, m)
 {
+
     GEO::initialize();
-    m.doc() = "Geogram binding for delaunay tetrahedrization"; // optional module docstring
+    GEO::Delaunay::initialize();
+    m.doc() = "Geogram binding for delaunay triangulation in 3D \n"
+        "https://brunolevy.github.io/geogram/classGEO_1_1Delaunay.html#a4c15eb491bcd73637d79ad9434b51568";
     py::class_<GEO::Delaunay, std::unique_ptr<GEO::Delaunay, py::nodelete>>(m, "ParallelDelaunay3D")
         .def(py::init([]()
                       { return GEO::Delaunay::create(3, "PDEL"); }))
+        .def("adjacent_index", &GEO::Delaunay::adjacent_index, "c1"_a, "c2"_a)
+        .def("cell_adjacent", &GEO::Delaunay::cell_adjacent, "c"_a, "if"_a)
+        .def("cell_is_finite", &GEO::Delaunay::cell_is_finite, "c"_a)
+        .def("cell_is_infinite", &GEO::Delaunay::cell_is_infinite, "c"_a)
+        .def("cell_size", &GEO::Delaunay::cell_size)
+        //.def("cell_to_cell", &GEO::Delaunay::cell_to_cell) TODO: pointer handling / pointer to array
+        //.def("cell_to_v", &GEO::Delaunay::cell_to_v) TODO: pointer handling / pointer to array
+        .def("cell_vertex", &GEO::Delaunay::cell_vertex, "c"_a, "lv"_a)
+        //.def("constraints", &GEO::Delaunay::constraints) // TODO pointer handling and Mesh class wrapping
+        .def("default_nb_neighbors", &GEO::Delaunay::default_nb_neighbors)
+        .def("dimension", &GEO::Delaunay::dimension)
+        //.def("get_neighbors",, "v"_a) TODO: return array and not pass by reference
         .def("set_vertices", [](GEO::Delaunay &delaunay, py::array_t<double, py::array::c_style | py::array::forcecast> vertices)
              { 
                 if (vertices.ndim() != 2 or vertices.shape(1) != 3) {
