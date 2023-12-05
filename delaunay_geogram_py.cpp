@@ -30,7 +30,7 @@ PYBIND11_MODULE(delaunay_geogram, m)
         //.def("get_neighbors",, "v"_a) TODO: return array and not pass by reference
         .def("set_vertices", [](GEO::Delaunay &delaunay, py::array_t<double, py::array::c_style | py::array::forcecast> vertices)
              { 
-                if (vertices.ndim() != 2 or vertices.shape(1) != 3) {
+                if (vertices.ndim() != 2 || vertices.shape(1) != 3) {
                         throw std::invalid_argument("vertices must be a 2D array with shape (n, 3)");
                     }
                 delaunay.set_vertices(vertices.shape(0), vertices.data()); })
