@@ -39,7 +39,7 @@ PYBIND11_MODULE(delaunay_geogram, m)
         .def(
             "get_all_neighbors", [](const GEO::Delaunay &dt)
             {
-                std::vector<geo_signed_index_t> edges; // may overflow :)
+                std::vector<geo_index_t> edges;
                 for (geo_index_t id_vertex = 0; id_vertex < dt.nb_vertices(); ++id_vertex)
                 {
                     GEO::vector<geo_index_t> neighbors;
@@ -48,14 +48,14 @@ PYBIND11_MODULE(delaunay_geogram, m)
                     {
                         if (neighbor > id_vertex) // we only want to add each edge once
                         {
-                            edges.emplace_back(geo_signed_index_t(id_vertex));
-                            edges.emplace_back(geo_signed_index_t(neighbor));
+                            edges.emplace_back(id_vertex);
+                            edges.emplace_back(neighbor);
                         }
                     }
                 }
 
                 // we use fotran stride to match SPT requirements for the strides of the array.
-                return py::array_t<geo_signed_index_t, py::array::f_style>(
+                return py::array_t<geo_index_t, py::array::f_style>(
                     std::vector<ptrdiff_t>{2, static_cast<uint32_t>(edges.size() / 2)},
                     &edges[0]); });
 }
