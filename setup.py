@@ -12,7 +12,7 @@ if sys.platform == "linux":
         "-ffp-contract=off",
         "-DGEO_STATIC_LIBS",
     ]
-    extra_link_args = []
+    extra_link_args = ["-lgomp"]
 if sys.platform == "win32":
     extra_compile_args = [
         "/openmp",
