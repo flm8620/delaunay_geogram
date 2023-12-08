@@ -21,9 +21,18 @@ PYBIND11_MODULE(delaunay_geogram, m)
         .def("cell_is_finite", &GEO::Delaunay::cell_is_finite, "c"_a)
         .def("cell_is_infinite", &GEO::Delaunay::cell_is_infinite, "c"_a)
         .def("cell_size", &GEO::Delaunay::cell_size)
-        //.def("cell_to_cell", &GEO::Delaunay::cell_to_cell) TODO: pointer handling / pointer to array
-        //.def("cell_to_v", &GEO::Delaunay::cell_to_v) TODO: pointer handling / pointer to array
+        .def("cell_to_cell", [](GEO::Delaunay &delaunay){
+                return py::array_t<geo_signed_index_t>(
+                    std::vector<ptrdiff_t>{delaunay.nb_cells(), delaunay.cell_size()},
+                    delaunay.cell_to_cell()); 
+        }, py::return_value_policy::reference_internal)
+        .def("cell_to_vertices", [](GEO::Delaunay &delaunay) {
+              return py::array_t<geo_signed_index_t>(
+                    std::vector<ptrdiff_t>{delaunay.nb_cells(), delaunay.cell_size()},
+                    delaunay.cell_to_v());      
+        }, py::return_value_policy::reference_internal) 
         .def("cell_vertex", &GEO::Delaunay::cell_vertex, "c"_a, "lv"_a)
+        .def("cell_adjacent", &GEO::Delaunay::cell_adjacent, "c"_a, "lf"_a)
         //.def("constraints", &GEO::Delaunay::constraints) // TODO pointer handling and Mesh class wrapping
         .def("default_nb_neighbors", &GEO::Delaunay::default_nb_neighbors)
         .def("dimension", &GEO::Delaunay::dimension)
