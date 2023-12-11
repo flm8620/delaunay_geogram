@@ -26,8 +26,8 @@ PYBIND11_MODULE(delaunay_geogram, m) {
           "cell_to_cell",
           [](GEO::Delaunay &delaunay) {
             return py::array_t<geo_signed_index_t>(
-                std::vector<ptrdiff_t>{delaunay.nb_cells(),
-                                       delaunay.cell_size()},
+                std::vector<ptrdiff_t>{static_cast<py::ssize_t>(delaunay.nb_cells()),
+                                       static_cast<py::ssize_t>(delaunay.cell_size())},
                 delaunay.cell_to_cell());
           },
           py::return_value_policy::reference_internal)
@@ -35,8 +35,8 @@ PYBIND11_MODULE(delaunay_geogram, m) {
           "cell_to_vertices",
           [](GEO::Delaunay &delaunay) {
             return py::array_t<geo_signed_index_t>(
-                std::vector<ptrdiff_t>{delaunay.nb_cells(),
-                                       delaunay.cell_size()},
+                std::vector<ptrdiff_t>{static_cast<py::ssize_t>(delaunay.nb_cells()),
+                                       static_cast<py::ssize_t>(delaunay.cell_size())},
                 delaunay.cell_to_v());
           },
           py::return_value_policy::reference_internal)
@@ -57,7 +57,7 @@ PYBIND11_MODULE(delaunay_geogram, m) {
                throw std::invalid_argument(
                    "vertices must be a 2D array with shape (n, 3)");
              }
-             delaunay.set_vertices(vertices.shape(0), vertices.data());
+             delaunay.set_vertices(static_cast<geo_index_t>(vertices.shape(0)), vertices.data());
            })
       .def("nearest_vertex",
            [](const GEO::Delaunay &dt,
@@ -91,7 +91,7 @@ PYBIND11_MODULE(delaunay_geogram, m) {
         // we use fotran stride to match SPT requirements for the strides of the
         // array.
         return py::array_t<geo_index_t, py::array::f_style>(
-            std::vector<ptrdiff_t>{2, static_cast<uint32_t>(edges.size() / 2)},
+            std::vector<ptrdiff_t>{2, static_cast<py::ssize_t>(edges.size() / 2)},
             &edges[0]);
       });
 }
