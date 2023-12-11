@@ -45,3 +45,4 @@ commands = pytest -s --basetemp="{envtmpdir}" {posargs} delaunay.py
 
 [tool.cibuildwheel]
 build = "cp3{9,10,11,12}-*"
+skip = "*-musllinux*"

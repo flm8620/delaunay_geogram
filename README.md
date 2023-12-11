@@ -12,7 +12,6 @@ Bindings are not complete and API could evolve and break, we will try to adhere 
 
 # Installation
 
-
 ```console
 git clone --recurse-submodules https://github.com/3DFin/delaunay_geogram
 pip install .
@@ -27,6 +26,10 @@ point_cloud = np.random.rand(100, 3)
 dt = ParallelDelaunay3D()
 dt.set_vertices(point_cloud)
 ```
+
+# Known Incompatibilities
+
+Due to the inclusion of `execinfo.h` in DelaunayPSM these bindings are not supported for now by `musl` based linux system (Gentoo, Alpine). It will be fixed upstream.
 
 # License
 
