@@ -6,9 +6,11 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    name: Build wheels on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        os: [ubuntu-22.04, windows-2022] 
         python-version: ['3.9', '3.10', '3.11', '3.12']
 
     steps:

@@ -3,12 +3,8 @@ name: build wheels
 # Trigger on PR and only if something is tagged on branches
 on:
   push:
-    branches: ["*"]
     tags: ["*"]
-  pull_request:
-    branches: ["*"]
   
-
 jobs:
   build_wheels:
     name: Build wheels on ${{ matrix.os }}
@@ -17,7 +13,7 @@ jobs:
       matrix:
         os: [ubuntu-22.04, windows-2022]      
       fail-fast: false
-      
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -41,8 +37,6 @@ jobs:
     name: Publish to PyPI
     needs: build_wheels
     runs-on: ubuntu-latest
-    # Only publish to PyPI when a commit is tagged
-    if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
     steps:
       - uses: actions/checkout@v4
         with:
