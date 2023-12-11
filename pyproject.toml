@@ -7,7 +7,7 @@ name = "delaunay-geogram"
 version = "0.0.1"
 description = "Semantic segmentation on large-scale 3D scenes"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.9"
 keywords = ["Delaunay Triangulation", "Geogram", "Python", "C++", "Mesh"]
 authors = [
   { name = "Bruno Levy" },
@@ -34,6 +34,13 @@ classifiers = [
 legacy_tox_ini = """
 [tox]
 envlist = py{39,310,311,312}
+
+[gh-actions]
+python =
+    3.9: py39
+    3.10: py310
+    3.11: py311
+    3.12: py312   
 
 [testenv]
 changedir = tests
