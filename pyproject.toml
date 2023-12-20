@@ -5,19 +5,16 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "delaunay-geogram"
 version = "0.0.1"
+license = "GPL-3.0-or-later"
 description = "Semantic segmentation on large-scale 3D scenes"
 readme = "README.md"
 requires-python = ">=3.9"
 keywords = ["Delaunay Triangulation", "Geogram", "Python", "C++", "Mesh"]
 authors = [
-  { name = "Bruno Levy" },
-  { name = "Swansea University"}
-]
-maintainers = [ 
   { name = "Carlos Cabo", email = "carloscabo@uniovi.es" },
   { name = "Diego Laino", email = "diegolainor@gmail.com" },
-  { name = "Romain Janvier", email = "romain.janvier@hotmail.fr" } 
 ]
+maintainers = []
 classifiers = [
   "Development Status :: 4 - Beta",
   "Programming Language :: Python",
@@ -46,7 +43,7 @@ python =
 changedir = tests
 deps =
   pytest >= 7.4
-  numpy >= 1.2
+  numpy >= 1.7
 commands = pytest -s --basetemp="{envtmpdir}" {posargs} delaunay.py
 """
 

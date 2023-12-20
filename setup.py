@@ -19,7 +19,8 @@ if sys.platform == "win32":
         "/DGEO_STATIC_LIBS",
         "/DWIN32_LEAN_AND_MEAN",
         "/DVC_EXTRALEAN",
-        "/DNOMINMAX" "/D_CRT_SECURE_NO_WARNINGS",
+        "/DNOMINMAX",
+        "/D_CRT_SECURE_NO_WARNINGS",
         "/D_USE_MATH_DEFINES",
     ]
     extra_link_args = ["advapi32.lib", "Shell32.lib"]
