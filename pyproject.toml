@@ -5,7 +5,6 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "delaunay-geogram"
 version = "0.0.1"
-license = "GPL-3.0-or-later"
 description = "Semantic segmentation on large-scale 3D scenes"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -23,6 +22,7 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: Implementation :: CPython",
+  "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
   "Topic :: Scientific/Engineering",
   "Intended Audience :: Science/Research",
 ]
