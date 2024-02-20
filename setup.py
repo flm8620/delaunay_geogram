@@ -25,6 +25,15 @@ if sys.platform == "win32":
     ]
     extra_link_args = ["advapi32.lib", "Shell32.lib"]
 
+if sys.platform == "darwin":
+    extra_compile_args=[
+        "-frounding-math",
+        "-O3",
+        "-ffp-contract=off",
+        "-DGEO_STATIC_LIBS",
+    ]
+    extra_link_args=[]
+
 ext_modules = [
     Pybind11Extension(
         "delaunay_geogram",
