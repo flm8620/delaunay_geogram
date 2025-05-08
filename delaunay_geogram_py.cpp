@@ -12,7 +12,7 @@ PYBIND11_MODULE(delaunay_geogram, m) {
   GEO::Delaunay::initialize();
   m.doc() = "Geogram binding for delaunay triangulation in 3D \n"
             "https://brunolevy.github.io/geogram/classGEO_1_1Delaunay.html";
-  py::class_<GEO::Delaunay, std::unique_ptr<GEO::Delaunay, py::nodelete>>(
+  py::class_<GEO::Delaunay, std::unique_ptr<GEO::Delaunay>>(
       m, "ParallelDelaunay3D")
       .def(py::init([]() { return GEO::Delaunay::create(3, "PDEL"); }))
       .def("adjacent_index", &GEO::Delaunay::adjacent_index, "c1"_a, "c2"_a)
